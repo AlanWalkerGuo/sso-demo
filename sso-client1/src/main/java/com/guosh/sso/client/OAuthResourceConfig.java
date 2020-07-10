@@ -25,6 +25,6 @@ public class OAuthResourceConfig extends ResourceServerConfigurerAdapter {
     		.authorizeRequests()
     		// 获取当前用户的基本信息
     		//.antMatchers("/api/**").hasAuthority("USER");
-		   .antMatchers("/api/**").hasAnyAuthority("ADMIN","TEACHER","STUDENT","CLASSTEACHER","ACTIVITYADMIN");
+		   .antMatchers("/api/**").authenticated();
 	}
 }
