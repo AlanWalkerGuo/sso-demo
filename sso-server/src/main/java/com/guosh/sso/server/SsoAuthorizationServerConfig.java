@@ -51,24 +51,28 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.authenticationManager(authenticationManager);
-		endpoints.tokenStore(jwtTokenStore()).accessTokenConverter(jwtAccessTokenConverter());
-	}
-	
-	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.tokenKeyAccess("permitAll()").tokenKeyAccess("isAuthenticated()");
-	}
-	
-	@Bean
-	public TokenStore jwtTokenStore() {
-		return new JwtTokenStore(jwtAccessTokenConverter());
+//		endpoints.tokenStore(jwtTokenStore()).accessTokenConverter(jwtAccessTokenConverter());
 	}
 
-	@Bean
-	public JwtAccessTokenConverter jwtAccessTokenConverter(){
-		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("jwtdemo");
-        return converter;
+
+
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+		oauthServer.allowFormAuthenticationForClients();
 	}
+
+
+
+//	@Bean
+//	public TokenStore jwtTokenStore() {
+//		return new JwtTokenStore(jwtAccessTokenConverter());
+//	}
+//
+//	@Bean
+//	public JwtAccessTokenConverter jwtAccessTokenConverter(){
+//		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//        converter.setSigningKey("jwtdemo");
+//        return converter;
+//	}
 
 }
